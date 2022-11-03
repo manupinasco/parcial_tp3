@@ -4,6 +4,7 @@
     package="ar.edu.ort.parcialtp3">
 
     <application
+        android:name="ar.edu.ort.parcialtp3.database.Tp3Application"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
