@@ -30,14 +30,14 @@
         app:layout_constraintGuide_percent="0.05" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/searchEditText"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:background="@drawable/search_edit_text_border"
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="5dp"
         android:ems="10"
-        android:fontFamily="@font/get_schwifty"
+        android:fontFamily="@font/rick_and_morty_font"
         android:hint="@string/searching_hint"
         android:inputType="textPersonName"
         android:padding="5dp"
@@ -46,10 +46,11 @@
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/characterRecyclerView"
         android:layout_width="409dp"
         android:layout_height="647dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/searchEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
