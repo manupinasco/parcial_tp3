@@ -16,7 +16,7 @@
     </style>
 
     <style name="RickAndMortyFont" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/get_schwifty</item>
+        <item name="android:fontFamily">@font/rick_and_morty_font</item>
         <item name="android:textColor">@color/aquamarine</item>
         <item name="android:shadowColor">@color/fluor_green</item>
         <item name="android:shadowRadius">5</item>
