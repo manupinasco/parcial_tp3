@@ -4,6 +4,7 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.SoundPool
 import android.os.*
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
@@ -31,6 +32,8 @@ class LoginFragment : Fragment() {
     private lateinit var usersRepository: UserRepository
     private lateinit var soundPool: SoundPool
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,6 +44,48 @@ class LoginFragment : Fragment() {
 
         context?.let { usersRepository = UserRepository.getInstance(it) }
 
+        val doAnimation = LoginFragmentArgs.fromBundle(requireArguments()).doAnimation
+        if(doAnimation) {
+            generateAnimation()
+        }
+        if(!doAnimation) {
+            putVisibilityOn()
+        }
+
+
+
+
+
+
+
+
+
+
+        return binding.root
+    }
+
+    private fun putVisibilityOn() {
+        val title = binding.titleLogin
+        val btnLogin = binding.btnLogin
+        val name = binding.loginName
+        val password = binding.loginPassword
+        val btnRegister = binding.btnGoToRegister
+        val imageView = binding.bgImageLogin
+
+        imageView.visibility = INVISIBLE
+
+        title.visibility = VISIBLE
+
+        name.visibility = VISIBLE
+
+        password.visibility = VISIBLE
+
+        btnLogin.visibility = VISIBLE
+
+        btnRegister.visibility = VISIBLE
+    }
+
+    private fun generateAnimation() {
 
         soundPool = if (Build.VERSION.SDK_INT
             >= Build.VERSION_CODES.LOLLIPOP
@@ -76,7 +121,7 @@ class LoginFragment : Fragment() {
                 .load(
                     context,
                     R.raw.portal_sound_effect,
-                    1
+                    2
                 )
             soundPool.setOnLoadCompleteListener { soundPool, sampleId, status ->
                 soundPool.play(
@@ -84,59 +129,46 @@ class LoginFragment : Fragment() {
                 )
 
                 if (status == 0) {
-                    generateAnimation()
+                    val zoomIn = AnimationUtils.loadAnimation(context, R.anim.zoom_in)
+                    val rotate = AnimationUtils.loadAnimation(context, R.anim.rotate)
+                    val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                    val title = binding.titleLogin
+                    val btnLogin = binding.btnLogin
+                    val name = binding.loginName
+                    val password = binding.loginPassword
+                    val btnRegister = binding.btnGoToRegister
+
+                    imageView.startAnimation(rotate)
+
+                    Handler(Looper.getMainLooper()).postDelayed(
+                        {
+                            title.visibility = VISIBLE
+                            title.startAnimation(zoomIn)
+                            name.visibility = VISIBLE
+                            name.startAnimation(zoomIn)
+                            password.visibility = VISIBLE
+                            password.startAnimation(zoomIn)
+                            btnLogin.visibility = VISIBLE
+                            btnLogin.startAnimation(zoomIn)
+                            btnRegister.visibility = VISIBLE
+                            btnRegister.startAnimation(zoomIn)
+                        },
+                        2000
+                    )
+
+                    Handler(Looper.getMainLooper()).postDelayed(
+                        {
+                            imageView.startAnimation(fadeOut)
+                            imageView.visibility = INVISIBLE
+                        },
+                        3000
+                    )
                 }
 
             }
         }
 
 
-
-
-
-
-
-
-        return binding.root
-    }
-
-    private fun generateAnimation() {
-
-        val zoomIn = AnimationUtils.loadAnimation(context, R.anim.zoom_in)
-        val rotate = AnimationUtils.loadAnimation(context, R.anim.rotate)
-        val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-        val imageView = binding.bgImageLogin
-        val title = binding.titleLogin
-        val btnLogin = binding.btnLogin
-        val name = binding.loginName
-        val password = binding.loginPassword
-        val btnRegister = binding.btnGoToRegister
-
-        imageView.startAnimation(rotate)
-
-        Handler(Looper.getMainLooper()).postDelayed(
-            {
-                title.visibility = VISIBLE
-                title.startAnimation(zoomIn)
-                name.visibility = VISIBLE
-                name.startAnimation(zoomIn)
-                password.visibility = VISIBLE
-                password.startAnimation(zoomIn)
-                btnLogin.visibility = VISIBLE
-                btnLogin.startAnimation(zoomIn)
-                btnRegister.visibility = VISIBLE
-                btnRegister.startAnimation(zoomIn)
-            },
-            2000
-        )
-
-        Handler(Looper.getMainLooper()).postDelayed(
-            {
-                imageView.startAnimation(fadeOut)
-                imageView.visibility = INVISIBLE
-            },
-            3000 // value in milliseconds
-        )
 
 
     }
@@ -171,7 +203,7 @@ class LoginFragment : Fragment() {
                 lifecycleScope.launch {
                     val user = usersRepository.getUser(name)
                     if(user != null) {
-                        if(decrypt(algorithm, cipherText, key, iv).compareTo(user.password) == 0) {
+                        if(decrypt(algorithm, cipherText, key, iv).compareTo(decrypt(algorithm, user.password, key, iv)) == 0) {
                             val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                             findNavController().navigate(action)
                         }
