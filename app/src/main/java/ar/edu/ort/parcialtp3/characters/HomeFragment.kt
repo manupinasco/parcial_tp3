@@ -66,6 +66,6 @@ class HomeFragment : Fragment(), onItemClickListener {
     }
 
     override fun onViewItemDetail(personaje: Personaje) {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment())
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(personaje))
     }
 }

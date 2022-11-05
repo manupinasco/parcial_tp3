@@ -8,14 +8,14 @@ data class Personaje(
     val name: String?,
     val status: String?,
     val species: String?,
-    val image: String?
+    val image: String?,
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
     ) {
     }
 
@@ -41,4 +41,5 @@ data class Personaje(
         }
     }
 }
+
 
