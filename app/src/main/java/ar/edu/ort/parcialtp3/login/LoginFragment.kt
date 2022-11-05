@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import ar.edu.ort.parcialtp3.R
 import ar.edu.ort.parcialtp3.databinding.FragmentLoginBinding
 import ar.edu.ort.parcialtp3.repository.UserRepository
+import ar.edu.ort.parcialtp3.usersession.UserSession
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.crypto.Cipher
@@ -204,6 +205,7 @@ class LoginFragment : Fragment() {
                     val user = usersRepository.getUser(name)
                     if(user != null) {
                         if(decrypt(algorithm, cipherText, key, iv).compareTo(decrypt(algorithm, user.password, key, iv)) == 0) {
+                            UserSession.idUser = user.id
                             val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                             findNavController().navigate(action)
                         }
@@ -239,3 +241,4 @@ class LoginFragment : Fragment() {
 
 
 }
+
