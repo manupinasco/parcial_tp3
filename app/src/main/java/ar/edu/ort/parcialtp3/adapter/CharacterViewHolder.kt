@@ -16,7 +16,7 @@ class CharacterViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     fun bind(personaje: Personaje){
         name.text = personaje.name
-        status.text = personaje.status
+        status.text = "Status: " + personaje.status
         Picasso.get().load(personaje.image).into(image)
     }
 
