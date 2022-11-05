@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ar.edu.ort.jefud_notifying_system.listener.onItemClickListener
 import ar.edu.ort.parcialtp3.adapter.CharacterAdapter
 import ar.edu.ort.parcialtp3.databinding.FragmentHomeBinding
 import ar.edu.ort.parcialtp3.model.ApiData
@@ -17,7 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), onItemClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get()= _binding!!
@@ -38,21 +40,21 @@ class HomeFragment : Fragment() {
         recCharacter.setHasFixedSize(true)
         gridLayoutManager = GridLayoutManager(context,2)
         recCharacter.layoutManager = gridLayoutManager
-        characterListAdapter = CharacterAdapter(charactersList)
+        characterListAdapter = CharacterAdapter(charactersList,this)
 
         return binding.root
     }
 
 
 
-    private fun getCharacters(){
+    private fun getCharacters() {
         val service = ApiBuilder.create()
 
         service.getAllCharacters().enqueue(object : Callback<ApiData>{
             override fun onResponse(call: Call<ApiData>, response: Response<ApiData>) {
                 if (response.isSuccessful){
                     charactersList = response.body()!!.results
-                    recCharacter.adapter = CharacterAdapter(charactersList)
+                    recCharacter.adapter = CharacterAdapter(charactersList,this@HomeFragment)
                 }
             }
 
@@ -61,5 +63,9 @@ class HomeFragment : Fragment() {
             }
 
         })
+    }
+
+    override fun onViewItemDetail(personaje: Personaje) {
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment())
     }
 }
