@@ -1,11 +1,14 @@
 package ar.edu.ort.parcialtp3.characters
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,11 +22,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class HomeFragment : Fragment(), onItemClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get()= _binding!!
     private lateinit var recCharacter: RecyclerView
+    private lateinit var searchEditText: EditText
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var characterListAdapter: CharacterAdapter
     private var charactersList: List<Personaje> = arrayListOf<Personaje>()
@@ -35,26 +40,39 @@ class HomeFragment : Fragment(), onItemClickListener {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        getCharacters()
+        searchEditText = binding.searchEditText
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                if(s.toString().length < 3){
+                    recCharacter.visibility = View.INVISIBLE
+                } else{
+                    getCharacters(s.toString())
+                }
+            }
+        })
         recCharacter = binding.characterRecyclerView
         recCharacter.setHasFixedSize(true)
         gridLayoutManager = GridLayoutManager(context,2)
         recCharacter.layoutManager = gridLayoutManager
-        characterListAdapter = CharacterAdapter(charactersList,this)
 
         return binding.root
     }
 
 
 
-    private fun getCharacters() {
+    private fun getCharacters(text: String) {
         val service = ApiBuilder.create()
 
-        service.getAllCharacters().enqueue(object : Callback<ApiData>{
+        service.getCharacters(text).enqueue(object : Callback<ApiData>{
             override fun onResponse(call: Call<ApiData>, response: Response<ApiData>) {
                 if (response.isSuccessful){
+                    recCharacter.visibility = View.VISIBLE
                     charactersList = response.body()!!.results
                     recCharacter.adapter = CharacterAdapter(charactersList,this@HomeFragment)
+                } else{
+                    recCharacter.visibility = View.INVISIBLE
                 }
             }
 
