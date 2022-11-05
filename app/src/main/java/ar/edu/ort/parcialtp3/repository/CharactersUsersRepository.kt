@@ -10,15 +10,15 @@ class CharactersUsersRepository private constructor(appDatabase: AppDatabase) {
 
     private val charactersUsersDao: CharactersUsersDao = appDatabase.charactersUsersDao()
 
-    fun addCharacterUser(characterUser: CharactersUsers) {
+    suspend fun addCharacterUser(characterUser: CharactersUsers) {
         charactersUsersDao.insert(characterUser)
     }
 
-    fun removeCharacterUser(characterUser: CharactersUsers) {
+    suspend fun removeCharacterUser(characterUser: CharactersUsers) {
         charactersUsersDao.delete(characterUser)
     }
 
-    fun getAllCharactersUsers(): List<CharactersUsers> {
+    suspend fun getAllCharactersUsers(): List<CharactersUsers> {
         return charactersUsersDao.getAll()
 
     }
