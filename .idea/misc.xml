@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Emanuel/Desktop/parcialTp3/app/src/main/res/drawable/round.xml" value="0.195" />
         <entry key="..\:/Users/Emanuel/Desktop/parcialTp3/app/src/main/res/layout/activity_main.xml" value="0.17395833333333333" />
         <entry key="..\:/Users/Emanuel/Desktop/parcialTp3/app/src/main/res/layout/details_fragment.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/Emanuel/Desktop/parcialTp3/app/src/main/res/layout/favourites_fragment.xml" value="0.18697916666666667" />
+        <entry key="..\:/Users/Emanuel/Desktop/parcialTp3/app/src/main/res/layout/fragment_details.xml" value="0.2713541666666667" />
+        <entry key="..\:/Users/Emanuel/Desktop/parcialTp3/app/src/main/res/layout/fragment_login.xml" value="0.33" />
+        <entry key="..\:/Users/Emanuel/Desktop/parcialTp3/app/src/main/res/layout/fragment_register.xml" value="0.33" />
+        <entry key="..\:/Users/Emanuel/Desktop/parcialTp3/app/src/main/res/layout/fragment_settings.xml" value="0.24322916666666666" />
         <entry key="..\:/Users/Emanuel/Desktop/parcialTp3/app/src/main/res/layout/home_fragment.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/Emanuel/Desktop/parcialTp3/app/src/main/res/layout/login_fragment.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/Emanuel/Desktop/parcialTp3/app/src/main/res/layout/settings_fragment.xml" value="0.18697916666666667" />
