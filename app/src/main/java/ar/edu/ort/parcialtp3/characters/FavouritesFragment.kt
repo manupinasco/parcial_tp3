@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.edu.ort.parcialtp3.R
+import ar.edu.ort.parcialtp3.model.User
 
 class FavouritesFragment : Fragment() {
 
@@ -33,7 +34,7 @@ class FavouritesFragment : Fragment() {
         // Pongo el nombre del usuario en el titulo.
         // Advertencia: Al momento de mostrar un texto al usuario siempre usar un String resource. Nunca hardcodear de
         // esta manera.
-        title.text = "Hola, ${UserSession.userName}"
+      //  title.text = "Hola, ${User.Int}"
         fillProductList()
     }
 
@@ -46,7 +47,7 @@ class FavouritesFragment : Fragment() {
         val layoutManager = LinearLayoutManager(context)
         recyclerViewFavourites.layoutManager = layoutManager
                                         //ACA IRIA FAVOURITES ADAPTER
-        recyclerViewFavourites.adapter = FavouritesAdapter(favouritesList, this)
+        //recyclerViewFavourites.adapter = FavouritesAdapter(favouritesList, this)
     }
 
 

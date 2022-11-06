@@ -12,5 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:textViewStyle">@style/RickAndMortyFont</item>
     </style>
+
+    <style name="RickAndMortyFont" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/get_schwifty</item>
+        <item name="android:textColor">@color/aquamarine</item>
+        <item name="android:shadowColor">@color/fluor_green</item>
+        <item name="android:shadowRadius">5</item>
+    </style>
+
 </resources>
