@@ -22,5 +22,18 @@ class SettingsActivity : AppCompatActivity() {
 
     }
 
+    class SettingsFragment : PreferenceFragmentCompat() {
+
+        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+            setPreferencesFromResource(R.xml.user_setting, rootKey)
+        }
+
+        /*override fun onPreferenceChange(
+            preference: Preference,
+            newValue: Any
+        ): Boolean {
+            return true
+        }*/
+    }
 
 }

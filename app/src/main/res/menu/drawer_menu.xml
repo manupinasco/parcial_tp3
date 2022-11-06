@@ -16,7 +16,7 @@
             android:title="Favoritos" />
 
         <item
-            android:id="@+id/settingsFragment"
+            android:id="@+id/settingsActivity"
             android:icon="@drawable/ic_settings"
             android:title="Settings" />
 
