@@ -6,9 +6,9 @@
         android:angle="-90"
         android:centerX="0.5"
         android:centerY="0.5"
-        android:startColor="#03C5B2"
-        android:centerColor="#C8C7C7"
-        android:endColor="#C8C7C7"
+        android:startColor="@color/teal_300"
+        android:centerColor="@color/light_grey"
+        android:endColor="@color/light_grey"
         />
 
 
@@ -24,10 +24,10 @@
         />
 
     <corners
-        android:topRightRadius="15dp"
-        android:bottomLeftRadius="15dp"
-        android:bottomRightRadius="15dp"
-        android:topLeftRadius="15dp"
+        android:topRightRadius="9dp"
+        android:bottomLeftRadius="9dp"
+        android:bottomRightRadius="9dp"
+        android:topLeftRadius="9dp"
         />
 
 </shape>

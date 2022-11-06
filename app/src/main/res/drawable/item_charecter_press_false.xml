@@ -6,8 +6,8 @@
         android:centerX="0.5"
         android:centerY="0.5"
         android:startColor="@color/teal_200"
-        android:centerColor="#ffffff"
-        android:endColor="#ffffff"
+        android:centerColor="@color/white"
+        android:endColor="@color/white"
         />
 
     <stroke
@@ -22,10 +22,10 @@
         />
 
     <corners
-        android:topRightRadius="15dp"
-        android:bottomLeftRadius="15dp"
-        android:bottomRightRadius="15dp"
-        android:topLeftRadius="15dp"
+        android:topRightRadius="9dp"
+        android:bottomLeftRadius="9dp"
+        android:bottomRightRadius="9dp"
+        android:topLeftRadius="9dp"
         />
 
 </shape>

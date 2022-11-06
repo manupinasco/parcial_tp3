@@ -4,9 +4,11 @@
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_300">#03C5B2</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="light_grey">#C8C7C7</color>
     <color name="fluor_green">#2ECF35</color>
     <color name="aquamarine">#09ACC6</color>
     <color name="green">#0D8112</color>
