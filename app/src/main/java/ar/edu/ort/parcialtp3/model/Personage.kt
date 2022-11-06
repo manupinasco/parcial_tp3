@@ -3,19 +3,20 @@ package ar.edu.ort.parcialtp3.model
 import android.os.Parcel
 import android.os.Parcelable
 
-data class Personaje(
+data class Personage(
     val id: Int,
     val name: String?,
     val status: String?,
     val species: String?,
-    val image: String?,
+    val image: String?
+
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
+        parcel.readString()
     ) {
     }
 
@@ -31,12 +32,12 @@ data class Personaje(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Personaje> {
-        override fun createFromParcel(parcel: Parcel): Personaje {
-            return Personaje(parcel)
+    companion object CREATOR : Parcelable.Creator<Personage> {
+        override fun createFromParcel(parcel: Parcel): Personage {
+            return Personage(parcel)
         }
 
-        override fun newArray(size: Int): Array<Personaje?> {
+        override fun newArray(size: Int): Array<Personage?> {
             return arrayOfNulls(size)
         }
     }

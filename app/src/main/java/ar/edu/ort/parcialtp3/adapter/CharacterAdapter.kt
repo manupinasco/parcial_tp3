@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ar.edu.ort.jefud_notifying_system.listener.onItemClickListener
 import ar.edu.ort.parcialtp3.R
-import ar.edu.ort.parcialtp3.model.Personaje
+import ar.edu.ort.parcialtp3.model.Personage
+import ar.edu.ort.parcialtp3.model.PersonageWithOrigin
 
-class CharacterAdapter(private val characterList: List<Personaje>, private val onItemClick: onItemClickListener): RecyclerView.Adapter<CharacterViewHolder>() {
+class CharacterAdapter(private val characterList: List<PersonageWithOrigin>, private val onItemClick: onItemClickListener): RecyclerView.Adapter<CharacterViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.character_item, parent, false)

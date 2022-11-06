@@ -44,8 +44,11 @@
             app:popUpTo="@id/favouritesFragment"
             app:popUpToInclusive="true" />
         <argument
-            android:name="personaje"
-            app:argType="ar.edu.ort.parcialtp3.model.Personaje" />
+            android:name="personage"
+            app:argType="ar.edu.ort.parcialtp3.model.Personage" />
+        <argument
+            android:name="origin"
+            app:argType="ar.edu.ort.parcialtp3.model.Origin" />
     </fragment>
     <fragment
         android:id="@+id/favouritesFragment"

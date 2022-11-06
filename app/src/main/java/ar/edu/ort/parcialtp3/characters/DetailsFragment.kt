@@ -1,5 +1,6 @@
 package ar.edu.ort.parcialtp3.characters
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import ar.edu.ort.parcialtp3.R
 import ar.edu.ort.parcialtp3.databinding.FragmentDetailsBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
@@ -18,12 +20,13 @@ class DetailsFragment : Fragment() {
     private val binding get()                       = _binding!!
 
     //Declaramos las variables necesarias
-    private lateinit var character_name             : TextView
-    private lateinit var character_status           : TextView
-    private lateinit var character_origin           : TextView
-    private lateinit var character_specie           : TextView
-    private lateinit var character_image            : ImageView
+    private lateinit var characterName             : TextView
+    private lateinit var characterStatus           : TextView
+    private lateinit var characterOrigin           : TextView
+    private lateinit var characterSpecie           : TextView
+    private lateinit var characterImage            : ImageView
     private lateinit var favourite_button           : FloatingActionButton
+    private lateinit var colorLive                  : TextView
 
 
 
@@ -34,13 +37,13 @@ class DetailsFragment : Fragment() {
     ): View? {
 
         _binding          = FragmentDetailsBinding.inflate(inflater, container, false)
-        character_status  = binding.characterStatus
-        character_name    = binding.nameCharacter
-        character_origin  = binding.originCharacter
-        character_specie  = binding.characterSpecies
-        character_image   = binding.characterImage
+        characterStatus  = binding.characterStatus
+        characterName    = binding.nameCharacter
+        characterOrigin  = binding.originCharacter
+        characterSpecie  = binding.characterSpecies
+        characterImage   = binding.characterImage
         favourite_button  = binding.addCharacter
-
+        colorLive         = binding.circle
 
 
 
@@ -51,15 +54,27 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.let{
-            val personaje = DetailsFragmentArgs.fromBundle(it).personaje
-
-            character_name.text   = personaje.name
-            character_status.text = personaje.status
-            character_origin.text = ""
-            character_specie.text = personaje.species
-            Picasso.get().load(personaje.image).into(character_image)
+            val personage = DetailsFragmentArgs.fromBundle(it).personage
+            val origin = DetailsFragmentArgs.fromBundle(it).origin
 
 
+            characterName.text   = personage.name
+            characterStatus.text = personage.status
+            characterOrigin.text = "Origen: " + origin.name
+            characterSpecie.text = "Especie: " + personage.species
+            Picasso.get().load(personage.image).into(characterImage)
+
+            if(characterStatus.text == "Dead" ) {
+                //colorLive.setBackgroundColor(Color.parseColor("#FF0000"))
+                colorLive.setBackgroundResource(R.drawable.circle_status_red)
+            }
+            else if(characterStatus.text == "unknown"){
+                colorLive.setBackgroundResource(R.drawable.circle_status_yellow)
+
+            }else{
+                colorLive.setBackgroundResource(R.drawable.circle_status)
+
+            }
 
 
         }

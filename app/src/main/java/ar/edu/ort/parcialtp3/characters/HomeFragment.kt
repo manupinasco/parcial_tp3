@@ -17,7 +17,8 @@ import ar.edu.ort.jefud_notifying_system.listener.onItemClickListener
 import ar.edu.ort.parcialtp3.adapter.CharacterAdapter
 import ar.edu.ort.parcialtp3.databinding.FragmentHomeBinding
 import ar.edu.ort.parcialtp3.model.ApiData
-import ar.edu.ort.parcialtp3.model.Personaje
+import ar.edu.ort.parcialtp3.model.PersonageWithOrigin
+import ar.edu.ort.parcialtp3.model.Personage
 import ar.edu.ort.parcialtp3.service.ApiBuilder
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,7 +34,7 @@ class HomeFragment : Fragment(), onItemClickListener {
     private lateinit var alertText: TextView
     private lateinit var gridLayoutManager: GridLayoutManager
     private lateinit var characterListAdapter: CharacterAdapter
-    private var charactersList: List<Personaje> = arrayListOf<Personaje>()
+    private var charactersList: List<PersonageWithOrigin> = arrayListOf<PersonageWithOrigin>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,7 +97,8 @@ class HomeFragment : Fragment(), onItemClickListener {
         })
     }
 
-    override fun onViewItemDetail(personaje: Personaje) {
-        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(personaje))
+    override fun onViewItemDetail(personageWithOrigin : PersonageWithOrigin) {
+        val personage = Personage(personageWithOrigin.id,personageWithOrigin.name,personageWithOrigin.status,personageWithOrigin.species,personageWithOrigin.image)
+        findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(personage,personageWithOrigin.origin))
     }
 }

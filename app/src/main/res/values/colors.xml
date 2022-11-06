@@ -7,7 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="fluor_green">#86BD51</color>
+    <color name="fluor_green">#2ECF35</color>
     <color name="aquamarine">#09ACC6</color>
+    <color name="green">#0D8112</color>
+    <color name="red">#BD291B</color>
+    <color name="yellow">#DDCC35</color>
 
 </resources>
