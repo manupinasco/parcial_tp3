@@ -18,8 +18,8 @@ class CharactersUsersRepository private constructor(appDatabase: AppDatabase) {
         charactersUsersDao.delete(characterUser)
     }
 
-    suspend fun getAllCharactersUsers(): List<CharactersUsers> {
-        return charactersUsersDao.getAll()
+    suspend fun getCharacterUserByIdUser(userId : Int): List<CharactersUsers> {
+        return charactersUsersDao.getCharacterUserByIdUser(userId.toString())
 
     }
 
