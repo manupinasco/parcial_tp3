@@ -10,15 +10,18 @@ class UserRepository private constructor(appDatabase: AppDatabase) {
 
     private val userDao: UserDao = appDatabase.userDao()
 
-    fun addUser(user: User) {
+    suspend fun addUser(user: User) {
         userDao.insert(user)
     }
 
-    fun removeUser(user: User) {
+    suspend fun getUser(name: String): User? {
+        return userDao.getUser(name)
+    }
+    suspend fun removeUser(user: User) {
         userDao.delete(user)
     }
 
-    fun getAllUser(): List<User> {
+    suspend fun getAllUser(): List<User> {
         return userDao.getAll()
 
     }

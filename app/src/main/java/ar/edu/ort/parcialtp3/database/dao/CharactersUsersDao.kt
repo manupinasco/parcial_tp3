@@ -6,17 +6,17 @@ import ar.edu.ort.parcialtp3.model.CharactersUsers
 @Dao
 interface CharactersUsersDao {
     @Query("SELECT * FROM charactersUsers")
-    fun getAll(): List<CharactersUsers>
+    suspend fun getAll(): List<CharactersUsers>
 
     @Query("SELECT * from charactersUsers WHERE  idUser = :idUser LIMIT 1")
-    fun getCharacterUserByIdUser(idUser: String): CharactersUsers
+    suspend fun getCharacterUserByIdUser(idUser: String): CharactersUsers
 
     @Query("SELECT * from charactersUsers WHERE  idCharacter = :idCharacter LIMIT 1")
-    fun getCharacterUserByIdCharacter(idCharacter: String): CharactersUsers
+    suspend fun getCharacterUserByIdCharacter(idCharacter: String): CharactersUsers
 
     @Delete
-    fun delete(characterUser: CharactersUsers)
+    suspend fun delete(characterUser: CharactersUsers)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insert(characterUser: CharactersUsers)
+    suspend fun insert(characterUser: CharactersUsers)
 }
