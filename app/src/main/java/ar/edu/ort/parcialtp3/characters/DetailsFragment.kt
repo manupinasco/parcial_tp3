@@ -97,7 +97,7 @@ class DetailsFragment : Fragment() {
                                 .show()
                         }
                         else{
-                            charactersUsersRepository.removeCharacterUser(CharactersUsers(idUser = userId, idCharacter = personage.id))
+                            charactersUsersRepository.removeCharacterUser(characterUser)
                             Toast.makeText(context, "Personaje removido de favoritos", Toast.LENGTH_SHORT)
                                 .show()
                         }
