@@ -25,7 +25,7 @@ class DetailsFragment : Fragment() {
     private lateinit var characterOrigin           : TextView
     private lateinit var characterSpecie           : TextView
     private lateinit var characterImage            : ImageView
-    private lateinit var favourite_button           : FloatingActionButton
+    private lateinit var favouriteButton           : FloatingActionButton
     private lateinit var colorLive                  : TextView
 
 
@@ -42,7 +42,7 @@ class DetailsFragment : Fragment() {
         characterOrigin  = binding.originCharacter
         characterSpecie  = binding.characterSpecies
         characterImage   = binding.characterImage
-        favourite_button  = binding.addCharacter
+        favouriteButton  = binding.addCharacter
         colorLive         = binding.circle
 
 
@@ -64,11 +64,10 @@ class DetailsFragment : Fragment() {
             characterSpecie.text = "Especie: " + personage.species
             Picasso.get().load(personage.image).into(characterImage)
 
-            if(characterStatus.text == "Dead" ) {
-                //colorLive.setBackgroundColor(Color.parseColor("#FF0000"))
+            if(characterStatus.text.equals("Dead")) {
                 colorLive.setBackgroundResource(R.drawable.circle_status_red)
             }
-            else if(characterStatus.text == "unknown"){
+            else if(characterStatus.text.equals("unknown")){
                 colorLive.setBackgroundResource(R.drawable.circle_status_yellow)
 
             }else{
