@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -48,10 +49,18 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this,navController,drawerLayout)
 
         //Listener para cuando se realiza la navegacion
-        navController.addOnDestinationChangedListener{_,_,_ ->
+        navController.addOnDestinationChangedListener{_,destination,_ ->
             //Mi icono izquierdo de la appBar va a ser el hamburger en drawable
             supportActionBar?.setHomeAsUpIndicator(R.drawable.hamburger)
+            if (destination.id == R.id.loginFragment || destination.id == R.id.registerFragment) {
+                supportActionBar?.hide()
+            }  else {
+                supportActionBar?.show()
+            }
+
+
         }
+
 
     }
     //Habilitar Navegacion desde la appbar con el Drawer
@@ -69,10 +78,9 @@ class MainActivity : AppCompatActivity() {
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
 
-        Log.d("Test",prefs.getBoolean("sync",false).toString())
-        Log.d("Test",prefs.getString("reply_string",""))
-        Log.d("Test",prefs.getString("signature_string","default signature"))
-        Log.d("Test",prefs.getString("edit_text_preference_1","aca no hay nada"))
+        Log.d("Test", prefs.getString("edit_text_preference_1","").toString())
+        Log.d("Test", prefs.getBoolean("switchMusic",false).toString())
+       // Log.d("Test",prefs.getString("edit_text_preference_1","aca no hay nada"))
 
     }
 
