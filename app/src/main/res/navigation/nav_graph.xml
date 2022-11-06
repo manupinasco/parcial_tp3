@@ -27,7 +27,11 @@
         android:id="@+id/settingsFragment"
         android:name="ar.edu.ort.parcialtp3.settings.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_settingsActivity"
+            app:destination="@id/settingsActivity" />
+    </fragment>
     <fragment
         android:id="@+id/detailsFragment"
         android:name="ar.edu.ort.parcialtp3.characters.DetailsFragment"
@@ -53,4 +57,8 @@
             android:id="@+id/action_favouritesFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="ar.edu.ort.parcialtp3.settings.SettingsActivity"
+        android:label="SettingsActivity" />
 </navigation>
