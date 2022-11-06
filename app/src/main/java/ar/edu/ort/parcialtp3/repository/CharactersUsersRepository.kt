@@ -23,6 +23,11 @@ class CharactersUsersRepository private constructor(appDatabase: AppDatabase) {
 
     }
 
+    suspend fun getCharacterUserByIdUserAndByIdCharacter(userId : Int, characterId: Int): CharactersUsers? {
+        return charactersUsersDao.getCharacterUserByIdUserAndByIdCharacter(userId.toString(), characterId.toString())
+
+    }
+
     companion object {
         private var charactersUsersRepository: CharactersUsersRepository? = null
 

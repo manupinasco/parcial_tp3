@@ -8,11 +8,12 @@ interface CharactersUsersDao {
     @Query("SELECT * FROM charactersUsers")
     suspend fun getAll(): List<CharactersUsers>
 
-    @Query("SELECT * from charactersUsers WHERE  idUser = :idUser LIMIT 1")
-    suspend fun getCharacterUserByIdUser(idUser: String): CharactersUsers
+    @Query("SELECT * from charactersUsers WHERE  idUser = :idUser AND idCharacter = :idCharacter LIMIT 1")
+    suspend fun getCharacterUserByIdUserAndByIdCharacter(idUser: String, idCharacter: String): CharactersUsers
+
 
     @Query("SELECT * from charactersUsers WHERE  idCharacter = :idCharacter LIMIT 1")
-    suspend fun getCharacterUserByIdCharacter(idCharacter: String): CharactersUsers
+    suspend fun getCharacterUserByIdCharacter(idCharacter: String): List<CharactersUsers>
 
     @Delete
     suspend fun delete(characterUser: CharactersUsers)

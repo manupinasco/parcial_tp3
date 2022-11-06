@@ -5,7 +5,15 @@
     android:id="@+id/details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/details_background"
     tools:context=".characters.DetailsFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondGuidelineV3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.71" />
 
     <ImageView
         android:id="@+id/characterImage"
@@ -16,6 +24,7 @@
         app:layout_constraintStart_toStartOf="@+id/firstGuidelineV"
         app:layout_constraintTop_toTopOf="@+id/firstGuidelineH"
         tools:src="@tools:sample/avatars" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/firstGuidelineH"
         android:layout_width="wrap_content"
@@ -65,37 +74,45 @@
 
     <TextView
         android:id="@+id/nameCharacter"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
         android:padding="5dp"
         android:text="Morty Smith"
         android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/secondGuidelineV3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/firstGuidelineV"
         app:layout_constraintTop_toTopOf="@+id/guideline7" />
 
     <TextView
         android:id="@+id/characterSpecies"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
         android:padding="5dp"
         android:text="Especie: Human"
         android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/secondGuidelineV3"
         app:layout_constraintStart_toStartOf="@+id/firstGuidelineV"
         app:layout_constraintTop_toBottomOf="@+id/nameCharacter" />
 
     <TextView
         android:id="@+id/originCharacter"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
         android:padding="5dp"
         android:text="Origen: Earth"
         android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/secondGuidelineV3"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/firstGuidelineV"
         app:layout_constraintTop_toBottomOf="@+id/characterSpecies" />
 
@@ -104,7 +121,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:backgroundTint="@color/purple_500"
+        app:tint="@android:color/white"
+        android:src="@drawable/ic_favorite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -113,7 +131,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="346dp" />
+        app:layout_constraintGuide_percent="0.4733242" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
