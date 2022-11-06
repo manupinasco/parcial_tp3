@@ -8,10 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.findNavController
+import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
 import ar.edu.ort.parcialtp3.R
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : PreferenceFragmentCompat() {
 
     lateinit var v : View
     lateinit var btnSettings : Button
@@ -19,7 +20,7 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         v = inflater.inflate(R.layout.fragment_settings, container, false)
 
         btnSettings = v.findViewById(R.id.btnSettings)
@@ -37,13 +38,16 @@ class SettingsFragment : Fragment() {
         prefs.getString("signature_string","default signature")?.let { Log.d("Test", it) }
         prefs.getString("edit_text_preference_1","aca no hay nada")?.let { Log.d("Test", it) }
 
-        //El boton que te lleva a los setings
         btnSettings.setOnClickListener {
 
             val action = SettingsFragmentDirections.actionSettingsFragmentToSettingsActivity()
             v.findNavController().navigate(action)
 
         }
+    }
+
+    override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
+        setPreferencesFromResource(R.xml.user_setting, rootKey)
     }
 
 

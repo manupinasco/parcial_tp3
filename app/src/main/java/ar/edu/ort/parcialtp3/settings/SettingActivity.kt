@@ -16,18 +16,11 @@ class SettingsActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.settings, SettingsInnerFragment())
+            .replace(R.id.settings, SettingsFragment())
             .commit()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     }
 
-    class SettingsInnerFragment : PreferenceFragmentCompat() {
 
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.user_setting, rootKey)
-        }
-
-
-    }
 }
