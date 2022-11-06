@@ -30,11 +30,7 @@
             android:id="@+id/action_homeFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="ar.edu.ort.parcialtp3.settings.SettingsFragment"
-        android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+
     <fragment
         android:id="@+id/detailsFragment"
         android:name="ar.edu.ort.parcialtp3.characters.DetailsFragment"
@@ -77,4 +73,8 @@
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <activity
+        android:id="@+id/settingsActivity"
+        android:name="ar.edu.ort.parcialtp3.settings.SettingsActivity"
+        android:label="SettingsActivity"/>
 </navigation>

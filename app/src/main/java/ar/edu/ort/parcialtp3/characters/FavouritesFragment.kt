@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.edu.ort.jefud_notifying_system.listener.onItemClickListener
 import ar.edu.ort.parcialtp3.R
@@ -83,6 +85,4 @@ class FavouritesFragment : Fragment(), onItemClickListener {
         val personage = Personage(personageWithOrigin.id,personageWithOrigin.name,personageWithOrigin.status,personageWithOrigin.species,personageWithOrigin.image)
         findNavController().navigate(FavouritesFragmentDirections.actionFavouritesFragmentToDetailsFragment(personage,personageWithOrigin.origin))
     }
-
-
 }

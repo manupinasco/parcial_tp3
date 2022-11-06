@@ -1,10 +1,12 @@
 package ar.edu.ort.parcialtp3.login
 
+import android.content.Context
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.SoundPool
 import android.os.*
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
@@ -64,6 +66,7 @@ class LoginFragment : Fragment() {
 
         return binding.root
     }
+
 
     private fun putVisibilityOn() {
         val title = binding.titleLogin
