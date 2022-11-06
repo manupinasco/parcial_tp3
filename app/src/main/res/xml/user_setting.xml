@@ -16,4 +16,5 @@
         android:defaultValue="false"
         android:key="switch_preference_1"
         android:title="Switch preference" />
+
 </PreferenceScreen>
