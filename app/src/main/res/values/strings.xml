@@ -2,4 +2,12 @@
     <string name="app_name">parcialTp3</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="searching_hint">Buscar</string>
+    <string name="default_text">Lorem Ipsum</string>
+    <string name ="light_mode_auto"> light_mode_auto</string>
+    <string name="light_mode_on">light_mode_on</string>
+    <string name="light_mode_off">light_mode_off</string>
+    <string name="pf_dark_auto">pf_dark_auto</string>
+    <string name="pf_light_on">pf_light_on</string>
+    <string name="pf_light_off">pf_light_off</string>
 </resources>

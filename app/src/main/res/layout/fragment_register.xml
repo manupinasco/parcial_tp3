@@ -61,7 +61,6 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/round"
         android:text="Registrarte"
-
         app:layout_constraintBottom_toTopOf="@+id/btnGoToLogin"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintHorizontal_bias="1.0"
