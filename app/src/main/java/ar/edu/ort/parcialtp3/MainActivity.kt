@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
+
     override fun onBackPressed() {
         val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
         navHost?.let { navFragment ->
@@ -76,11 +77,7 @@ class MainActivity : AppCompatActivity() {
             }  else {
                 supportActionBar?.show()
             }
-
-
         }
-
-
     }
     //Habilitar Navegacion desde la appbar con el Drawer
     override fun onSupportNavigateUp(): Boolean {

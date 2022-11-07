@@ -37,7 +37,6 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
     private lateinit var searchEditText: EditText
     private lateinit var alertText: TextView
     private lateinit var gridLayoutManager: GridLayoutManager
-    private lateinit var characterListAdapter: CharacterAdapter
     private var charactersList: List<PersonageWithOrigin> = arrayListOf<PersonageWithOrigin>()
 
     override fun onCreateView(
@@ -101,6 +100,8 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
         })
     }
 
+    /*Al tocar el card crea un personaje al partir del personaje con origen
+    * y lo pasa como parametro junto al origen como parcelables*/
     override fun onViewItemDetail(personageWithOrigin : PersonageWithOrigin) {
         val personage = Personage(personageWithOrigin.id,personageWithOrigin.name,personageWithOrigin.status,personageWithOrigin.species,personageWithOrigin.image)
         findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailsFragment(personage,personageWithOrigin.origin))
@@ -110,6 +111,7 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
         showAlertDialogLogout()
         return false
     }
+
 
     private fun showAlertDialogLogout() {
         val builder = AlertDialog.Builder(requireContext())
