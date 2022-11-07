@@ -20,6 +20,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
 import android.view.WindowManager
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,13 +45,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val fragmentRegister = this.supportFragmentManager.findFragmentById(R.id.registerFragment)
-        (fragmentRegister as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
-            if (!isCanceled) super.onBackPressed()
-        }
-        val fragmentHome = this.supportFragmentManager.findFragmentById(R.id.homeFragment)
-        (fragmentHome as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
-            if (!isCanceled) super.onBackPressed()
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+        navHost?.let { navFragment ->
+            navFragment.childFragmentManager.primaryNavigationFragment?.let { fragment ->
+                (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
+                    if (!isCanceled) {
+                        super.onBackPressed()
+                    }
+                }
+            }
         }
     }
 
