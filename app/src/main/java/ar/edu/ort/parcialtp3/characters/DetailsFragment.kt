@@ -1,5 +1,6 @@
 package ar.edu.ort.parcialtp3.characters
 
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
+import androidx.preference.PreferenceManager
 import ar.edu.ort.parcialtp3.R
 import ar.edu.ort.parcialtp3.backmethod.IOnBackPressed
 import ar.edu.ort.parcialtp3.databinding.FragmentDetailsBinding
@@ -94,45 +96,58 @@ class DetailsFragment : Fragment(), IOnBackPressed{
                     if (characterUser != null)
                         favouriteButton.setImageResource(R.drawable.ic_favorite)
                 }
+                val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
 
-                favouriteButton.setOnClickListener {
-                    lifecycleScope.launch {
-                        val userId = UserSession.idUser
-                        if (userId != null) {
-                            val characterUser =
-                                charactersUsersRepository.getCharacterUserByIdUserAndByIdCharacter(
-                                    userId,
-                                    personage.id
-                                )
-                            if (characterUser == null) {
-                                favouriteButton.setImageResource(R.drawable.ic_favorite)
-                                charactersUsersRepository.addCharacterUser(
-                                    CharactersUsers(
-                                        idUser = userId,
-                                        idCharacter = personage.id
+                if (prefs.getBoolean("enableFav",true)) {
+                    favouriteButton.setOnClickListener {
+                        lifecycleScope.launch {
+                            val userId = UserSession.idUser
+                            if (userId != null) {
+                                val characterUser =
+                                    charactersUsersRepository.getCharacterUserByIdUserAndByIdCharacter(
+                                        userId,
+                                        personage.id
                                     )
-                                )
-                                Toast.makeText(
-                                    context,
-                                    "Personaje agregado a favoritos",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
-                            } else {
-                                favouriteButton.setImageResource(R.drawable.ic_favorite_not_selected)
-                                charactersUsersRepository.removeCharacterUser(characterUser)
-                                Toast.makeText(
-                                    context,
-                                    "Personaje removido de favoritos",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
+                                if (characterUser == null) {
+                                    favouriteButton.setImageResource(R.drawable.ic_favorite)
+                                    charactersUsersRepository.addCharacterUser(
+                                        CharactersUsers(
+                                            idUser = userId,
+                                            idCharacter = personage.id
+                                        )
+                                    )
+                                    Toast.makeText(
+                                        context,
+                                        "Personaje agregado a favoritos",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                } else {
+                                    favouriteButton.setImageResource(R.drawable.ic_favorite_not_selected)
+                                    charactersUsersRepository.removeCharacterUser(characterUser)
+                                    Toast.makeText(
+                                        context,
+                                        "Personaje removido de favoritos",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                }
+
                             }
 
+
                         }
-
-
                     }
+                } else {
+                    favouriteButton.setOnClickListener{
+                        Toast.makeText(
+                        context,
+                        "Botón deshabilitado",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+                    }
+
                 }
             }
         }
@@ -142,5 +157,6 @@ class DetailsFragment : Fragment(), IOnBackPressed{
     override fun onBackPressed(): Boolean {
         return true
     }
+
 
 }

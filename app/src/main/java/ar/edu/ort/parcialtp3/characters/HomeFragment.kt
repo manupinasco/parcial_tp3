@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ar.edu.ort.jefud_notifying_system.listener.onItemClickListener
@@ -49,28 +50,41 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         alertText = binding.alertText
+
         searchEditText = binding.searchEditText
         getAllCharacters()
-        searchEditText.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable) {
-                if(s.toString().length < 3){
-                    alertText.visibility = View.VISIBLE
-                    recCharacter.visibility = View.INVISIBLE
-                    if(s.toString().length == 2){
-                        alertText.text = "Escriba 1 caracter mas"
-                    }else if(s.toString().length == 1){
-                        alertText.text = "Escriba 2 caracteres mas"
-                    }else{
-                        alertText.visibility = View.INVISIBLE
-                        getAllCharacters()
+
+
+
+        alertText.visibility = View.VISIBLE
+        alertText.text = "Complete el buscador"
+
+            searchEditText.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+                override fun afterTextChanged(s: Editable) {
+                    val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    if(prefs.getString("defaultCharacter","").toString() == "" || s.toString().length > 0) {
+                        if(s.toString().length < 3){
+                            alertText.visibility = View.VISIBLE
+                            recCharacter.visibility = View.INVISIBLE
+                            if(s.toString().length == 2){
+                                alertText.text = "Escriba 1 caracter mas"
+                            }else if(s.toString().length == 1){
+                                alertText.text = "Escriba 2 caracteres mas"
+                            }else{
+                                alertText.visibility = View.INVISIBLE
+                                getAllCharacters()
+                            }
+                        } else{
+                            getCharacters(s.toString())
+                        }
+                    } else {
+                        getCharacters(prefs.getString("defaultCharacter","").toString())
                     }
-                } else{
-                    getCharacters(s.toString())
                 }
-            }
-        })
+            })
+
         recCharacter = binding.characterRecyclerView
         recCharacter.setHasFixedSize(true)
         gridLayoutManager = GridLayoutManager(context,2)
@@ -161,7 +175,6 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
     private fun logout() {
 
         UserSession.idUser = -1
-
         val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment(false)
         findNavController().navigate(action)
     }
