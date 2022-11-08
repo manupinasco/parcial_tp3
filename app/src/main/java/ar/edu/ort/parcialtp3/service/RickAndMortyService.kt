@@ -11,9 +11,14 @@ import retrofit2.http.Query
 
 interface RickAndMortyService {
 
+    /*/characters?name="name"
+    * Aca el endpoint trae los personajes por nombre*/
     @GET("character")
     fun getCharacters(@Query(value = "name", encoded = true) name: String): Call<ApiData>
 
+    /*/characters/ids
+    * aca trae todos los personajes de la lista del user
+    * El endpoint trae todos los personajes con el id separado por comas*/
     @GET("character/{ids}")
     fun getCharactersById(@Path("ids") ids : String): Call<List<PersonageWithOrigin>>
 }

@@ -1,8 +1,10 @@
 package ar.edu.ort.parcialtp3
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import ar.edu.ort.parcialtp3.backmethod.IOnBackPressed
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -18,6 +20,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
 import android.view.WindowManager
+import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,6 +44,21 @@ class MainActivity : AppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
+
+    override fun onBackPressed() {
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+        navHost?.let { navFragment ->
+            navFragment.childFragmentManager.primaryNavigationFragment?.let { fragment ->
+                (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
+                    if (!isCanceled) {
+                        super.onBackPressed()
+                    }
+                }
+            }
+        }
+    }
+
+
     private fun setUpDrawerLayout() {
 
         val navController = navHostFragment.navController
@@ -59,11 +77,7 @@ class MainActivity : AppCompatActivity() {
             }  else {
                 supportActionBar?.show()
             }
-
-
         }
-
-
     }
     //Habilitar Navegacion desde la appbar con el Drawer
     override fun onSupportNavigateUp(): Boolean {
