@@ -20,6 +20,7 @@ import com.google.android.material.navigation.NavigationView
 import android.view.WindowManager
 import android.widget.Toast
 import ar.edu.ort.parcialtp3.backmethod.IOnBackPressed
+import ar.edu.ort.parcialtp3.characters.DetailsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -81,10 +82,8 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
 
         val prefs = PreferenceManager.getDefaultSharedPreferences(this)
-
         Log.d("Test", prefs.getString("edit_text_preference_1","").toString())
-        Log.d("Test", prefs.getBoolean("switchMusic",false).toString())
-       // Log.d("Test",prefs.getString("edit_text_preference_1","aca no hay nada"))
+        Log.d("Test", prefs.getBoolean("enableFav",false).toString())
 
     }
 

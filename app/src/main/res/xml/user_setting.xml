@@ -7,16 +7,18 @@
         android:title="Check box preference" />
 
     <EditTextPreference
-        android:defaultValue="Default value"
-        android:key="edit_text_preference_1"
+        android:icon="@drawable/preferences_character"
+        android:defaultValue=""
+        android:key="defaultCharacter"
         android:selectAllOnFocus="true"
         android:singleLine="true"
-        android:title="Edit text preference" />
+        android:title="Personaje Predefinido" />
 
     <SwitchPreference
+        android:icon="@drawable/preferences_favorites"
         android:defaultValue="false"
-        android:key="deleteFav"
-        android:title="Borrar Favoritos" />
+        android:key="enableFav"
+        android:title="Habilitar Agregar a Favoritos" />
 
 
 </PreferenceScreen>
