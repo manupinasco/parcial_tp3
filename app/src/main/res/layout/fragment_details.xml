@@ -121,10 +121,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        app:tint="@android:color/white"
-        android:src="@drawable/ic_favorite"
+        android:src="@drawable/ic_favorite_not_selected"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:tint="@android:color/white" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
