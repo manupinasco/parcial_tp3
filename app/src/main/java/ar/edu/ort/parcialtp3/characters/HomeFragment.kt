@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,6 +25,7 @@ import ar.edu.ort.parcialtp3.model.PersonageWithOrigin
 import ar.edu.ort.parcialtp3.model.Personage
 import ar.edu.ort.parcialtp3.service.ApiBuilder
 import ar.edu.ort.parcialtp3.usersession.UserSession
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +39,7 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
     private lateinit var searchEditText: EditText
     private lateinit var alertText: TextView
     private lateinit var gridLayoutManager: GridLayoutManager
+    private lateinit var adapter: CharacterAdapter
     private var charactersList: List<PersonageWithOrigin> = arrayListOf<PersonageWithOrigin>()
 
     override fun onCreateView(
@@ -45,11 +48,9 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
     ): View? {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        searchEditText = binding.searchEditText
         alertText = binding.alertText
-        alertText.visibility = View.VISIBLE
-        alertText.text = "Complete el buscador"
+        searchEditText = binding.searchEditText
+        getAllCharacters()
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
@@ -59,8 +60,11 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
                     recCharacter.visibility = View.INVISIBLE
                     if(s.toString().length == 2){
                         alertText.text = "Escriba 1 caracter mas"
+                    }else if(s.toString().length == 1){
+                        alertText.text = "Escriba 2 caracteres mas"
                     }else{
-                        alertText.text = "Escriba " + (3 - s.toString().length).toString() + " caracteres mas"
+                        alertText.visibility = View.INVISIBLE
+                        getAllCharacters()
                     }
                 } else{
                     getCharacters(s.toString())
@@ -94,6 +98,30 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
             }
 
             override fun onFailure(call: Call<ApiData>, t: Throwable) {
+                Log.e("Example", t.stackTraceToString())
+            }
+
+        })
+    }
+
+    private fun getAllCharacters() {
+        val service = ApiBuilder.create()
+        var ids = ""
+        for (i in 1..826) {
+            ids = "$ids$i,"
+        }
+        service.getCharactersById(ids).enqueue(object : Callback<List<PersonageWithOrigin>> {
+            override fun onResponse(call: Call<List<PersonageWithOrigin>>, response: Response<List<PersonageWithOrigin>>) {
+                if (response.isSuccessful){
+                    recCharacter.visibility = View.VISIBLE
+                    charactersList = response.body()!!
+                    recCharacter.adapter = CharacterAdapter(charactersList,this@HomeFragment)
+                } else{
+
+                }
+            }
+
+            override fun onFailure(call: Call<List<PersonageWithOrigin>>, t: Throwable) {
                 Log.e("Example", t.stackTraceToString())
             }
 
