@@ -1,24 +1,17 @@
 package ar.edu.ort.parcialtp3
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
-import com.google.android.material.navigation.NavigationView
-import android.view.WindowManager
 import ar.edu.ort.parcialtp3.backmethod.IOnBackPressed
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +35,21 @@ class MainActivity : AppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
+
+    override fun onBackPressed() {
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+        navHost?.let { navFragment ->
+            navFragment.childFragmentManager.primaryNavigationFragment?.let { fragment ->
+                (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
+                    if (!isCanceled) {
+                        super.onBackPressed()
+                    }
+                }
+            }
+        }
+    }
+
+
     private fun setUpDrawerLayout() {
 
         val navController = navHostFragment.navController
@@ -60,11 +68,7 @@ class MainActivity : AppCompatActivity() {
             }  else {
                 supportActionBar?.show()
             }
-
-
         }
-
-
     }
     //Habilitar Navegacion desde la appbar con el Drawer
     override fun onSupportNavigateUp(): Boolean {
@@ -89,14 +93,5 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    override fun onBackPressed() {
-        val fragmentRegister = this.supportFragmentManager.findFragmentById(R.id.registerFragment)
-        (fragmentRegister as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
-            if (!isCanceled) super.onBackPressed()
-        }
-        val fragmentHome = this.supportFragmentManager.findFragmentById(R.id.homeFragment)
-        (fragmentHome as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
-            if (!isCanceled) super.onBackPressed()
-        }
-    }
+
 }

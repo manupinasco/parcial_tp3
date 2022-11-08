@@ -58,6 +58,8 @@ class RegisterFragment : Fragment(), IOnBackPressed {
                     val user = usersRepository.getUser(username)
                     if(user == null) {
                         usersRepository.addUser(User(name = username, password = cipherText))
+                        binding.registerName.text.clear()
+                        binding.registerPassword.text.clear()
                         Toast.makeText(context, "Registrado con éxito", Toast.LENGTH_SHORT)
                             .show()
                     }
