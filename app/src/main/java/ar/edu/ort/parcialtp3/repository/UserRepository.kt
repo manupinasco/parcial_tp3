@@ -17,6 +17,11 @@ class UserRepository private constructor(appDatabase: AppDatabase) {
     suspend fun getUser(name: String): User? {
         return userDao.getUser(name)
     }
+
+    suspend fun getUserById(id: Int): User? {
+        return userDao.getUserById(id)
+    }
+
     suspend fun removeUser(user: User) {
         userDao.delete(user)
     }

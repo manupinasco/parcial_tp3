@@ -2,20 +2,152 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout5"
+    android:id="@+id/details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/details_background"
     tools:context=".characters.DetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView5"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondGuidelineV3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.71" />
+
+    <ImageView
+        android:id="@+id/characterImage"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/hello_blank_fragment"
+        app:layout_constraintBottom_toTopOf="@+id/secondGuidelineH"
+        app:layout_constraintEnd_toStartOf="@+id/secondGuidelineV"
+        app:layout_constraintStart_toStartOf="@+id/firstGuidelineV"
+        app:layout_constraintTop_toTopOf="@+id/firstGuidelineH"
+        tools:src="@tools:sample/avatars" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firstGuidelineH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firstGuidelineV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondGuidelineV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/secondGuidelineH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.37" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/thirdGuidelineH"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <TextView
+        android:id="@+id/characterStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Alive"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintStart_toStartOf="@+id/guideline8"
+        app:layout_constraintTop_toBottomOf="@+id/characterImage" />
+
+    <TextView
+        android:id="@+id/nameCharacter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:padding="5dp"
+        android:text="Morty Smith"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/secondGuidelineV3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/firstGuidelineV"
+        app:layout_constraintTop_toTopOf="@+id/guideline7" />
+
+    <TextView
+        android:id="@+id/characterSpecies"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:padding="5dp"
+        android:text="Especie: Human"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/secondGuidelineV3"
+        app:layout_constraintStart_toStartOf="@+id/firstGuidelineV"
+        app:layout_constraintTop_toBottomOf="@+id/nameCharacter" />
+
+    <TextView
+        android:id="@+id/originCharacter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:padding="5dp"
+        android:text="Origen: Earth"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toStartOf="@+id/secondGuidelineV3"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/firstGuidelineV"
+        app:layout_constraintTop_toBottomOf="@+id/characterSpecies" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addCharacter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:src="@drawable/ic_favorite_not_selected"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:tint="@android:color/white" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4733242" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.37" />
+
+    <TextView
+        android:id="@+id/circle"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/circle_status"
+        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:layout_constraintEnd_toStartOf="@+id/guideline8"
+        app:layout_constraintStart_toStartOf="@+id/firstGuidelineV"
+        app:layout_constraintTop_toTopOf="@+id/secondGuidelineH" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

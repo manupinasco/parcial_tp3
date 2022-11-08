@@ -69,6 +69,16 @@ dependencies {
     // Jetpack Compose Integration
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //Picasso para las image
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     def room_version = "2.4.3"
 
     implementation("androidx.room:room-runtime:$room_version")
@@ -84,4 +94,11 @@ dependencies {
 
     def core_version = "1.6.0"
     implementation("androidx.core:core-ktx:$core_version")
+
+    def preference_version = "1.2.0"
+
+    // Java language implementation
+    implementation("androidx.preference:preference:$preference_version")
+    // Kotlin
+    implementation("androidx.preference:preference-ktx:$preference_version")
 }

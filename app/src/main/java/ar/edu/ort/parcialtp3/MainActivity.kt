@@ -17,6 +17,9 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
 import com.google.android.material.navigation.NavigationView
+import android.view.WindowManager
+import android.widget.Toast
+import ar.edu.ort.parcialtp3.backmethod.IOnBackPressed
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,6 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         setUpDrawerLayout()
 
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     private fun setUpDrawerLayout() {
