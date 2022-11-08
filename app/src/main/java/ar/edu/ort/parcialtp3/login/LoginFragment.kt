@@ -86,7 +86,7 @@ class LoginFragment : Fragment() {
 
         btnLogin.visibility = VISIBLE
 
-        btnRegister.visibility = VISIBLE
+        btnRegister.visibility  = VISIBLE
     }
 
     private fun generateAnimation() {

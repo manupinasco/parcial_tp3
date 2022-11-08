@@ -84,6 +84,14 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
-
+    override fun onBackPressed() {
+        val fragmentRegister = this.supportFragmentManager.findFragmentById(R.id.registerFragment)
+        (fragmentRegister as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
+            if (!isCanceled) super.onBackPressed()
+        }
+        val fragmentHome = this.supportFragmentManager.findFragmentById(R.id.homeFragment)
+        (fragmentHome as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
+            if (!isCanceled) super.onBackPressed()
+        }
+    }
 }

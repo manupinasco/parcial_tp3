@@ -1,5 +1,6 @@
 package ar.edu.ort.parcialtp3.register
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,8 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import ar.edu.ort.parcialtp3.R
-import ar.edu.ort.parcialtp3.databinding.FragmentLoginBinding
+import ar.edu.ort.parcialtp3.backmethod.IOnBackPressed
 import ar.edu.ort.parcialtp3.databinding.FragmentRegisterBinding
 import ar.edu.ort.parcialtp3.model.User
 import ar.edu.ort.parcialtp3.repository.UserRepository
@@ -20,11 +20,13 @@ import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
 
-class RegisterFragment : Fragment() {
+class RegisterFragment : Fragment(), IOnBackPressed {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
     private lateinit var usersRepository: UserRepository
+
+
 
 
     override fun onCreateView(
@@ -84,5 +86,11 @@ class RegisterFragment : Fragment() {
         val cipherText = cipher.doFinal(inputText.toByteArray())
         return Base64.getEncoder().encodeToString(cipherText)
     }
+
+    override fun onBackPressed(): Boolean {
+
+        return false
+    }
+
 
 }
