@@ -48,14 +48,17 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         alertText = binding.alertText
-
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        if(prefs.getString("defaultCharacter","").toString() == "") {
+            getAllCharacters()
+        } else {
+            getCharacters(prefs.getString("defaultCharacter","").toString())
+        }
         searchEditText = binding.searchEditText
-        getAllCharacters()
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable) {
-                val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
                 if(prefs.getString("defaultCharacter","").toString() == "" || s.toString().length > 0) {
                     if(s.toString().length < 3){
                         alertText.visibility = View.VISIBLE

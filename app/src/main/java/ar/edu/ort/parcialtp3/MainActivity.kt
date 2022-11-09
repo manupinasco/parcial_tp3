@@ -21,6 +21,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import ar.edu.ort.parcialtp3.backmethod.IOnBackPressed
 import ar.edu.ort.parcialtp3.characters.DetailsFragment
+import ar.edu.ort.parcialtp3.characters.FavouritesFragment
 import ar.edu.ort.parcialtp3.usersession.UserSession
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
 
         setUpDrawerLayout()
+        supportActionBar?.setDisplayShowTitleEnabled(false);
+
 
         navigationView.menu.findItem(R.id.loginFragment).setOnMenuItemClickListener {
             logout()
@@ -63,13 +66,17 @@ class MainActivity : AppCompatActivity() {
         //Listener para cuando se realiza la navegacion
         navController.addOnDestinationChangedListener{_,destination,_ ->
             //Mi icono izquierdo de la appBar va a ser el hamburger en drawable
-            supportActionBar?.setHomeAsUpIndicator(R.drawable.hamburger)
             if (destination.id == R.id.loginFragment || destination.id == R.id.registerFragment) {
                 supportActionBar?.hide()
             }  else {
                 supportActionBar?.show()
             }
 
+            if (destination.id == R.id.detailsFragment){
+                supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+            } else {
+                supportActionBar?.setHomeAsUpIndicator(R.drawable.hamburger)
+            }
 
         }
 
@@ -82,6 +89,16 @@ class MainActivity : AppCompatActivity() {
         } else {
             drawerLayout.openDrawer(GravityCompat.START)
         }
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+        navHost?.let { navFragment ->
+            navFragment.childFragmentManager.primaryNavigationFragment?.let { fragment ->
+                if(fragment is DetailsFragment ) {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    onBackPressed()
+                }
+            }
+        }
+
         return false //NavigationUI.navigateUp(navHostFragment.navController, drawerLayout)
     }
 
