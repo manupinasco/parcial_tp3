@@ -1,9 +1,7 @@
 package ar.edu.ort.parcialtp3.settings
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceFragment
-import androidx.core.content.SharedPreferencesCompat
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceFragmentCompat
 import ar.edu.ort.parcialtp3.R
 
@@ -19,7 +17,11 @@ class SettingsActivity : AppCompatActivity() {
             .replace(R.id.settings, SettingsFragment())
             .commit()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
 
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return false
     }
 
     class SettingsFragment : PreferenceFragmentCompat() {

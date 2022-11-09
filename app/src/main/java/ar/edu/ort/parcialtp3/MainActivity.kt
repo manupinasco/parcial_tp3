@@ -21,6 +21,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import ar.edu.ort.parcialtp3.backmethod.IOnBackPressed
 import ar.edu.ort.parcialtp3.characters.DetailsFragment
+import ar.edu.ort.parcialtp3.usersession.UserSession
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,7 +42,13 @@ class MainActivity : AppCompatActivity() {
 
         setUpDrawerLayout()
 
+        navigationView.menu.findItem(R.id.loginFragment).setOnMenuItemClickListener {
+            logout()
+            true
+        }
+
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
     }
 
     private fun setUpDrawerLayout() {
@@ -88,13 +95,29 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val fragmentRegister = this.supportFragmentManager.findFragmentById(R.id.registerFragment)
-        (fragmentRegister as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
-            if (!isCanceled) super.onBackPressed()
-        }
-        val fragmentHome = this.supportFragmentManager.findFragmentById(R.id.homeFragment)
-        (fragmentHome as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
-            if (!isCanceled) super.onBackPressed()
+        val navHost = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
+        navHost?.let { navFragment ->
+            navFragment.childFragmentManager.primaryNavigationFragment?.let { fragment ->
+                val isCanceled = (fragment as? IOnBackPressed)?.onBackPressed()
+                if(isCanceled != null) {
+                    if (!isCanceled) {
+                        super.onBackPressed()
+                    }
+                }
+                else {
+                    super.onBackPressed()
+                }
+            }
         }
     }
+
+    fun logout() {
+        val navController = findNavController(R.id.fragmentContainerView)
+        UserSession.idUser = -1
+        navController.navigateUp() // to clear previous navigation history
+        navController.navigate(R.id.loginFragment)
+        drawerLayout.closeDrawer(GravityCompat.START)
+    }
+
+
 }

@@ -30,7 +30,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FavouritesFragment : Fragment(), onItemClickListener, IOnBackPressed{
+class FavouritesFragment : Fragment(), onItemClickListener{
     private var _binding: FragmentFavouritesBinding? = null
     private val binding get()= _binding!!
     private lateinit var recFavouriteCharacter: RecyclerView
@@ -99,9 +99,5 @@ class FavouritesFragment : Fragment(), onItemClickListener, IOnBackPressed{
     override fun onViewItemDetail(personageWithOrigin: PersonageWithOrigin) {
         val personage = Personage(personageWithOrigin.id,personageWithOrigin.name,personageWithOrigin.status,personageWithOrigin.species,personageWithOrigin.image)
         findNavController().navigate(FavouritesFragmentDirections.actionFavouritesFragmentToDetailsFragment(personage,personageWithOrigin.origin))
-    }
-
-    override fun onBackPressed(): Boolean {
-        return true
     }
 }

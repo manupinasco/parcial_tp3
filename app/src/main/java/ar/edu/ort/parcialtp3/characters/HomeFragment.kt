@@ -12,7 +12,6 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,7 +25,6 @@ import ar.edu.ort.parcialtp3.model.PersonageWithOrigin
 import ar.edu.ort.parcialtp3.model.Personage
 import ar.edu.ort.parcialtp3.service.ApiBuilder
 import ar.edu.ort.parcialtp3.usersession.UserSession
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,37 +51,31 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
 
         searchEditText = binding.searchEditText
         getAllCharacters()
-
-
-
-        alertText.visibility = View.VISIBLE
-        alertText.text = "Complete el buscador"
-
-            searchEditText.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-                override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-                override fun afterTextChanged(s: Editable) {
-                    val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
-                    if(prefs.getString("defaultCharacter","").toString() == "" || s.toString().length > 0) {
-                        if(s.toString().length < 3){
-                            alertText.visibility = View.VISIBLE
-                            recCharacter.visibility = View.INVISIBLE
-                            if(s.toString().length == 2){
-                                alertText.text = "Escriba 1 caracter mas"
-                            }else if(s.toString().length == 1){
-                                alertText.text = "Escriba 2 caracteres mas"
-                            }else{
-                                alertText.visibility = View.INVISIBLE
-                                getAllCharacters()
-                            }
-                        } else{
-                            getCharacters(s.toString())
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable) {
+                val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+                if(prefs.getString("defaultCharacter","").toString() == "" || s.toString().length > 0) {
+                    if(s.toString().length < 3){
+                        alertText.visibility = View.VISIBLE
+                        recCharacter.visibility = View.INVISIBLE
+                        if(s.toString().length == 2){
+                            alertText.text = "Escriba 1 caracter mas"
+                        }else if(s.toString().length == 1){
+                            alertText.text = "Escriba 2 caracteres mas"
+                        }else{
+                            alertText.visibility = View.INVISIBLE
+                            getAllCharacters()
                         }
-                    } else {
-                        getCharacters(prefs.getString("defaultCharacter","").toString())
+                    } else{
+                        getCharacters(s.toString())
                     }
+                } else {
+                    getCharacters(prefs.getString("defaultCharacter","").toString())
                 }
-            })
+            }
+        })
 
         recCharacter = binding.characterRecyclerView
         recCharacter.setHasFixedSize(true)
@@ -151,7 +143,7 @@ class HomeFragment : Fragment(), onItemClickListener, IOnBackPressed {
 
     override fun onBackPressed(): Boolean {
         showAlertDialogLogout()
-        return false
+        return true
     }
 
 

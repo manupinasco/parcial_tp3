@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import ar.edu.ort.parcialtp3.R
 import ar.edu.ort.parcialtp3.databinding.FragmentLoginBinding
 import ar.edu.ort.parcialtp3.repository.UserRepository
@@ -47,7 +48,12 @@ class LoginFragment : Fragment() {
 
         context?.let { usersRepository = UserRepository.getInstance(it) }
 
-        val doAnimation = LoginFragmentArgs.fromBundle(requireArguments()).doAnimation
+        var doAnimation = LoginFragmentArgs.fromBundle(requireArguments()).doAnimation
+        val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
+        if(prefs.getBoolean("check_box_preference_1",true)){
+            putVisibilityOn()
+            doAnimation = false
+        }
         if(doAnimation) {
             generateAnimation()
         }

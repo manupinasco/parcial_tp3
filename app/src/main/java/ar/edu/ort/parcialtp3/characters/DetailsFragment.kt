@@ -26,7 +26,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
-class DetailsFragment : Fragment(), IOnBackPressed{
+class DetailsFragment : Fragment(){
 
     //Realizamos el binding
     private var _binding: FragmentDetailsBinding?   = null
@@ -152,11 +152,5 @@ class DetailsFragment : Fragment(), IOnBackPressed{
             }
         }
     }
-
-
-    override fun onBackPressed(): Boolean {
-        return true
-    }
-
 
 }
