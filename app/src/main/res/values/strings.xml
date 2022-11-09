@@ -3,6 +3,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="searching_hint">Buscar</string>
+    <string name="title">Rick y Morty</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="register">Registrate</string>
+    <string name="login">Registrate</string>
+    <string name="nowLogin">Ahora logueate!</string>
+    <string name="enter">Continuar</string>
+    <string name="oneMoreCaracter">Escriba 1 caracter mas</string>
+    <string name="twoMoreCaracters">Escriba 2 caracteres mas</string>
+
     <string name="default_text">Lorem Ipsum</string>
     <string name ="light_mode_auto"> light_mode_auto</string>
     <string name="light_mode_on">light_mode_on</string>

@@ -3,6 +3,7 @@ package ar.edu.ort.parcialtp3
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
@@ -17,6 +18,7 @@ import ar.edu.ort.parcialtp3.characters.DetailsFragment
 import ar.edu.ort.parcialtp3.settings.SettingsActivity
 import ar.edu.ort.parcialtp3.usersession.UserSession
 import com.google.android.material.navigation.NavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,8 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         navigationView.menu.findItem(R.id.settingsActivity).setOnMenuItemClickListener {
-            val navController = findNavController(R.id.fragmentContainerView)
-            navController.navigate(R.id.homeFragment)
+            findNavController(R.id.fragmentContainerView).navigate(R.id.homeFragment)
             drawerLayout.closeDrawer(GravityCompat.START)
             startActivity(Intent(this, SettingsActivity::class.java))
             true
@@ -70,15 +71,13 @@ class MainActivity : AppCompatActivity() {
             if (destination.id == R.id.loginFragment || destination.id == R.id.registerFragment) {
                 supportActionBar?.hide()
             }  else {
+                if (destination.id == R.id.detailsFragment){
+                    supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+                } else {
+                    supportActionBar?.setHomeAsUpIndicator(R.drawable.hamburger)
+                }
                 supportActionBar?.show()
             }
-
-            if (destination.id == R.id.detailsFragment){
-                supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
-            } else {
-                supportActionBar?.setHomeAsUpIndicator(R.drawable.hamburger)
-            }
-
         }
 
 

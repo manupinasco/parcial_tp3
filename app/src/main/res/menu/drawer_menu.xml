@@ -10,7 +10,7 @@
             android:id="@+id/homeFragment"
             android:icon="@drawable/ic_baseline_home_24"
             android:title="Home"
-            tools:ignore="DuplicateIds" />
+            />
 
         <item
             android:id="@+id/favouritesFragment"
