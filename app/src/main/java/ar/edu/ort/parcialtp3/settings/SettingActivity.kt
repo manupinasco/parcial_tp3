@@ -1,9 +1,13 @@
 package ar.edu.ort.parcialtp3.settings
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.preference.PreferenceFragmentCompat
+import ar.edu.ort.parcialtp3.MainActivity
 import ar.edu.ort.parcialtp3.R
+
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -21,7 +25,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        finish()
+        onBackPressed()
         return false
     }
 

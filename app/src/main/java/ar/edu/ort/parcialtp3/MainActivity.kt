@@ -1,28 +1,22 @@
 package ar.edu.ort.parcialtp3
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import androidx.preference.PreferenceManager
-import com.google.android.material.navigation.NavigationView
-import android.view.WindowManager
-import android.widget.Toast
 import ar.edu.ort.parcialtp3.backmethod.IOnBackPressed
 import ar.edu.ort.parcialtp3.characters.DetailsFragment
-import ar.edu.ort.parcialtp3.characters.FavouritesFragment
+import ar.edu.ort.parcialtp3.settings.SettingsActivity
 import ar.edu.ort.parcialtp3.usersession.UserSession
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,9 +38,16 @@ class MainActivity : AppCompatActivity() {
         setUpDrawerLayout()
         supportActionBar?.setDisplayShowTitleEnabled(false);
 
-
         navigationView.menu.findItem(R.id.loginFragment).setOnMenuItemClickListener {
             logout()
+            true
+        }
+
+        navigationView.menu.findItem(R.id.settingsActivity).setOnMenuItemClickListener {
+            val navController = findNavController(R.id.fragmentContainerView)
+            navController.navigate(R.id.homeFragment)
+            drawerLayout.closeDrawer(GravityCompat.START)
+            startActivity(Intent(this, SettingsActivity::class.java))
             true
         }
 

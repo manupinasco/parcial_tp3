@@ -49,11 +49,13 @@ class LoginFragment : Fragment() {
         context?.let { usersRepository = UserRepository.getInstance(it) }
 
         var doAnimation = LoginFragmentArgs.fromBundle(requireArguments()).doAnimation
+
         val prefs = PreferenceManager.getDefaultSharedPreferences(requireContext())
         if(prefs.getBoolean("check_box_preference_1",true)){
             putVisibilityOn()
             doAnimation = false
         }
+
         if(doAnimation) {
             generateAnimation()
         }
